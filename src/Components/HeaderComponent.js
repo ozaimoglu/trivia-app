@@ -15,6 +15,10 @@ class HeaderComponent extends React.Component {
         this.setState({remainingTime: 15});
     }
 
+    stopCountdown() {
+        clearInterval(this.myInterval);
+    }
+
     componentWillUnmount() {
         clearInterval(this.myInterval);
     }
