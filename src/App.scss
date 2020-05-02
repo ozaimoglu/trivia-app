@@ -2,6 +2,10 @@
     border: 2px solid black;
     width: 50%;
     height: 640px;
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+    
     margin: auto;
     background-color: rgba(0, 81, 255, 0.2);
     padding: 0px !important;
