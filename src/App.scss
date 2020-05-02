@@ -47,11 +47,9 @@
     height: 90%;
     margin: auto;
 
-    .answerButtonRow {
-        .answerButton {
-            margin-top: 20px;
-            width: 50%;
-        }
+    .answerButton {
+        margin-top: 20px;
+        width: 50%;
     }
     .btn:focus {
         background-color: #007bff;
