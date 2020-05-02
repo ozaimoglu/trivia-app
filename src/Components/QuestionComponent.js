@@ -10,12 +10,15 @@ class QuestionComponent extends React.Component {
         }
         this.useJoker = this.useJoker.bind(this);
     }
+
+    //decode the question strings
     decodeText(text) {
         var txt = document.createElement("textarea");
         txt.innerHTML = text;
         return txt.value;
     }
 
+    // shuffle answers button
     shuffle(a) {
         for (let i = a.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));

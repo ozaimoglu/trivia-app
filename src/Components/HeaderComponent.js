@@ -10,6 +10,7 @@ class HeaderComponent extends React.Component {
         }
     }
 
+    // when last question was true, time is updated to 15
     resetCountdown() {
         this.setState({remainingTime: 15});
     }
@@ -18,6 +19,7 @@ class HeaderComponent extends React.Component {
         clearInterval(this.myInterval);
     }
 
+    // go to timesup screen
     timeExpired() {
         clearInterval(this.myInterval);
         alert("Time expired!!!, Your Score : " + this.props.score);

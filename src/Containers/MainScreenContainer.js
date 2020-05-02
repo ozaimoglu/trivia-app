@@ -17,11 +17,14 @@ class MainScreenContainer extends React.Component {
         this.props.history.push("/game");
     }
 
+    //Level stored on sessionStroage because I dont want to send on URL
     setDifficulty(value) {
         sessionStorage.setItem("quizDifficulty", value);
         this.setState({quizDifficulty: value})
     }
 
+
+    //TODO
     setCategory(value) {
         sessionStorage.setItem("quizCategoty", value);
         this.setState({quizCategoty: value})

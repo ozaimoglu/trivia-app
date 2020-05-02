@@ -21,6 +21,7 @@ class GameScreenContainer extends React.Component {
         this.headerComponent = React.createRef();
     }
 
+    //fetch questions from opentdb, if success headers countdown starts, and delete difficulty level from session storage because when go back to main screen, user still can select mixed level
     componentDidMount () {
         fetch("https://opentdb.com/api.php?amount=10" + (this.state.quizDifficulty != "null" && this.state.quizDifficulty != null ? "&difficulty=" + this.state.quizDifficulty: "")).then(res => res.json()).then( (result) => {
             this.setState({questions: result.results});
@@ -29,6 +30,7 @@ class GameScreenContainer extends React.Component {
         });
     }
 
+    // update score respect to time, and check answer is true
     clickedAnswer(result) {
         if(result == "correct") {
             this.setState({score: this.state.score + (10 * this.headerComponent.current.state.remainingTime), questionNumber: this.state.questionNumber + 1, remainingTime: 15});
@@ -39,6 +41,7 @@ class GameScreenContainer extends React.Component {
         }
     }
 
+    // when use joker, questions json is updated, 2 of incorrect answer is deleted
     useJoker(){
         var newData = this.state.questions;
         newData[this.state.questionNumber].incorrect_answers.splice(0, 2);
