@@ -19,13 +19,11 @@ class MainScreenContainer extends React.Component {
 
     setDifficulty(value) {
         sessionStorage.setItem("quizDifficulty", value);
-        console.log(value);
         this.setState({quizDifficulty: value})
     }
 
     setCategory(value) {
         sessionStorage.setItem("quizCategoty", value);
-        console.log(value);
         this.setState({quizCategoty: value})
     }
 

@@ -30,7 +30,6 @@ class GameScreenContainer extends React.Component {
     }
 
     clickedAnswer(result) {
-        console.log("SCOREEE S" + (this.state.score + (10 * this.headerComponent.current.state.remainingTime)));
         if(result == "correct") {
             this.setState({score: this.state.score + (10 * this.headerComponent.current.state.remainingTime), questionNumber: this.state.questionNumber + 1, remainingTime: 15});
             this.headerComponent.current.resetCountdown();
