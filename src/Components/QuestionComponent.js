@@ -29,7 +29,6 @@ class QuestionComponent extends React.Component {
 
     generateAnswerButtons() {
         let answers = [];
-        console.log(this.props.question.correct_answer);
         answers.push(
             <Row key={0} className="justify-content-center answerButton">
                 <Button className="shadow-none" onClick={() => this.props.clickedAnswer("correct")}>{this.decodeText(this.props.question.correct_answer)}</Button>

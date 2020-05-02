@@ -30,9 +30,9 @@ class EndQuestionComponent extends React.Component {
                             width={200}/>
                 </Row>
                 {this.props.isCorrect ? <Row className="justify-content-center endQuestionRow">
-                    You earned {this.props.questionScore} points from last questions.
+                    You have earned {this.props.questionScore} points.
                 </Row> : <Row className="justify-content-center endQuestionRow">
-                    You earned total {this.props.totalScore}.
+                    You have earned total {this.props.totalScore}.
                 </Row>}
                 <Row className="justify-content-center endQuestionRow">
                     <Button onClick={() => this.props.clickNextQuestion()}>{this.props.isCorrect ? "NEXT QUESTION" : "HOME PAGE"}</Button>
