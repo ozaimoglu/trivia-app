@@ -19,8 +19,12 @@ class MainScreenContainer extends React.Component {
 
     //Level stored on sessionStroage because I dont want to send on URL
     setDifficulty(value) {
-        sessionStorage.setItem("quizDifficulty", value);
-        this.setState({quizDifficulty: value})
+        if(value !== "mixed") {
+            sessionStorage.setItem("quizDifficulty", value);
+            this.setState({quizDifficulty: value})
+        }else {
+            this.setState({quizDifficulty: "Mixed"})
+        }
     }
 
 
@@ -60,6 +64,7 @@ class MainScreenContainer extends React.Component {
                                 <Dropdown.Item onClick={() => this.setDifficulty("easy")}>Easy</Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.setDifficulty("medium")}>Medium</Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.setDifficulty("hard")}>Hard</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.setDifficulty("mixed")}>Mixed</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Row>
