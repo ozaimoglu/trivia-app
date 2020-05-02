@@ -22,7 +22,7 @@ class GameScreenContainer extends React.Component {
     }
 
     componentDidMount () {
-        fetch("https://opentdb.com/api.php?amount=10" + (this.state.quizDifficulty != "null" ? "&difficulty=" + this.state.quizDifficulty: "")).then(res => res.json()).then( (result) => {
+        fetch("https://opentdb.com/api.php?amount=10" + (this.state.quizDifficulty != "null" && this.state.quizDifficulty != null ? "&difficulty=" + this.state.quizDifficulty: "")).then(res => res.json()).then( (result) => {
             this.setState({questions: result.results});
             this.headerComponent.current.startCountdown();
             sessionStorage.setItem("quizDifficulty", null);
