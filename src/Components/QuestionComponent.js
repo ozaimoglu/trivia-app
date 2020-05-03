@@ -31,12 +31,12 @@ class QuestionComponent extends React.Component {
         let answers = [];
         answers.push(
             <Row key={0} className="justify-content-center answerButton">
-                <Button className="shadow-none" onClick={() => this.props.clickedAnswer("correct")}>{this.decodeText(this.props.question.correct_answer)}</Button>
+                <Button className="shadow-none deneme" onClick={() => this.props.clickedAnswer("correct")}>{this.decodeText(this.props.question.correct_answer)}</Button>
             </Row>);
         for(var i = 0; i < this.props.question.incorrect_answers.length; i++){
             answers.push(
                 <Row id={i+1} key={i+1} className="justify-content-center answerButton">
-                    <Button onClick={() => this.props.clickedAnswer("wrong")}>{this.decodeText(this.props.question.incorrect_answers[i])}</Button>
+                    <Button className="deneme" onClick={() => this.props.clickedAnswer("wrong")}>{this.decodeText(this.props.question.incorrect_answers[i])}</Button>
                 </Row>);
             
         }

@@ -26,7 +26,6 @@ class HeaderComponent extends React.Component {
     // go to timesup screen
     timeExpired() {
         clearInterval(this.myInterval);
-        alert("Time expired!!!, Your Score : " + this.props.score);
         this.props.history.push("/timesUp");
     }
 
