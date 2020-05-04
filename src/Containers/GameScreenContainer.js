@@ -4,6 +4,8 @@ import {Container, Col, Row, Button} from 'react-bootstrap';
 import HeaderComponent from '../Components/HeaderComponent';
 import QuestionComponent from '../Components/QuestionComponent';
 import EndQuestionComponent from '../Components/EndQuestionComponent';
+import Lottie from 'react-lottie';
+import animationData from '../assets/loader-lottie.json'
 
 class GameScreenContainer extends React.Component {
     constructor() {
@@ -16,7 +18,8 @@ class GameScreenContainer extends React.Component {
             quizDifficulty: sessionStorage.getItem("quizDifficulty"),
             hasJoker: true,
             showQuestion: true,
-            isCorrect: true
+            isCorrect: true,
+            loaded: false
         }
         this.clickedAnswer = this.clickedAnswer.bind(this);
         this.useJoker = this.useJoker.bind(this);
@@ -27,7 +30,7 @@ class GameScreenContainer extends React.Component {
     //fetch questions from opentdb, if success headers countdown starts, and delete difficulty level from session storage because when go back to main screen, user still can select mixed level
     componentDidMount () {
         fetch("https://opentdb.com/api.php?amount=10" + (this.state.quizDifficulty != "null" && this.state.quizDifficulty != null ? "&difficulty=" + this.state.quizDifficulty: "")).then(res => res.json()).then( (result) => {
-            this.setState({questions: result.results});
+            this.setState({questions: result.results, loaded: true});
             this.headerComponent.current.startCountdown();
             sessionStorage.setItem("quizDifficulty", null);
         });
@@ -70,11 +73,23 @@ class GameScreenContainer extends React.Component {
     }
 
     render() {
+        const defaultOptions = {
+            loop: true,
+            autoplay: true, 
+            animationData: animationData,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice'
+            }
+          };
         return(
             <Container className="mainContainer">
                 <HeaderComponent ref={this.headerComponent} history={this.props.history} questionNumber={this.state.questionNumber} score={this.state.score} remainingTime={this.state.remainingTime}/>
-                {this.state.showQuestion ? <QuestionComponent useJoker={this.useJoker} hasJoker={this.state.hasJoker} clickedAnswer = {this.clickedAnswer} question={this.state.questions[this.state.questionNumber]}/> :
-                <EndQuestionComponent totalScore={this.state.score} questionScore={(10 * this.headerComponent.current.state.remainingTime)} clickNextQuestion={this.clickNextQuestion} isCorrect={this.state.isCorrect}/>}
+                {this.state.loaded ? this.state.showQuestion ? <QuestionComponent useJoker={this.useJoker} hasJoker={this.state.hasJoker} clickedAnswer = {this.clickedAnswer} question={this.state.questions[this.state.questionNumber]}/> :
+                    <EndQuestionComponent totalScore={this.state.score} questionScore={(10 * this.headerComponent.current.state.remainingTime)} clickNextQuestion={this.clickNextQuestion} isCorrect={this.state.isCorrect}/> : 
+                    <Lottie options={defaultOptions}
+                                height={400}
+                                width={400}/>
+                }
             </Container>
         );
     }
