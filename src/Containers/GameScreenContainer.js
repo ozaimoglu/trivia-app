@@ -87,8 +87,8 @@ class GameScreenContainer extends React.Component {
                 {this.state.loaded ? this.state.showQuestion ? <QuestionComponent useJoker={this.useJoker} hasJoker={this.state.hasJoker} clickedAnswer = {this.clickedAnswer} question={this.state.questions[this.state.questionNumber]}/> :
                     <EndQuestionComponent totalScore={this.state.score} questionScore={(10 * this.headerComponent.current.state.remainingTime)} clickNextQuestion={this.clickNextQuestion} isCorrect={this.state.isCorrect}/> : 
                     <Lottie options={defaultOptions}
-                                height={400}
-                                width={400}/>
+                                height={240}
+                                width={240}/>
                 }
             </Container>
         );
