@@ -6,6 +6,7 @@ import QuestionComponent from '../Components/QuestionComponent';
 import EndQuestionComponent from '../Components/EndQuestionComponent';
 import Lottie from 'react-lottie';
 import animationData from '../assets/loader-lottie.json'
+import Swal from 'sweetalert2'
 
 class GameScreenContainer extends React.Component {
     constructor() {
@@ -33,7 +34,18 @@ class GameScreenContainer extends React.Component {
             this.setState({questions: result.results, loaded: true});
             this.headerComponent.current.startCountdown();
             sessionStorage.setItem("quizDifficulty", null);
-        });
+        },(error) => {
+            Swal.fire({
+                title: 'Error',
+                text: 'opentdb API is not working now!',
+                icon: 'error',
+              }).then((result) => {
+                  if(result.value){
+                    this.props.history.push("/");
+                  }
+              })
+          }
+        );
     }
 
     // update score respect to time, and check answer is true
