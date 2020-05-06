@@ -68,6 +68,7 @@ class MainScreenContainer extends React.Component {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Row>
+                    {sessionStorage.getItem("userScore") != null ? <Row className="justify-content-center scoreRow">Last Score : {sessionStorage.getItem("userScore")}</Row> : null}
                     <Row className="startButtonRow justify-content-center">
                         <Button onClick={this.gotoGameScreen} variant="primary" className="startButton">
                             START GAME
