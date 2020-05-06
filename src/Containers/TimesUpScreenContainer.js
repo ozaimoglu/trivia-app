@@ -26,6 +26,7 @@ class TimesUpScreenContainer extends React.Component {
                                 height={400}
                                 width={400}/>
                     </Row>
+                    <Row className="justify-content-center scoreRow">Your Score : {sessionStorage.getItem("userScore")}</Row>
                     <Row className="justify-content-center">
                         <Button onClick={this.gotoHomeScreen} variant="primary">HOME SCREEN</Button>
                     </Row>

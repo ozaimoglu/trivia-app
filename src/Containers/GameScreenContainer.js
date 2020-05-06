@@ -1,12 +1,13 @@
 import React from 'react';
 import '../App.scss';
-import {Container, Col, Row, Button} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import HeaderComponent from '../Components/HeaderComponent';
 import QuestionComponent from '../Components/QuestionComponent';
 import EndQuestionComponent from '../Components/EndQuestionComponent';
 import Lottie from 'react-lottie';
-import animationData from '../assets/loader-lottie.json'
-import Swal from 'sweetalert2'
+import animationData from '../assets/loader-lottie.json';
+import Swal from 'sweetalert2';
+import questionsJson from '../assets/questions.json';
 
 class GameScreenContainer extends React.Component {
     constructor() {
@@ -26,6 +27,7 @@ class GameScreenContainer extends React.Component {
         this.useJoker = this.useJoker.bind(this);
         this.clickNextQuestion = this.clickNextQuestion.bind(this);
         this.headerComponent = React.createRef();
+        sessionStorage.setItem("userScore", 0);
     }
 
     //fetch questions from opentdb, if success headers countdown starts, and delete difficulty level from session storage because when go back to main screen, user still can select mixed level
@@ -36,14 +38,14 @@ class GameScreenContainer extends React.Component {
             sessionStorage.setItem("quizDifficulty", null);
         },(error) => {
             Swal.fire({
-                title: 'Error',
-                text: 'opentdb API is not working now!',
-                icon: 'error',
+                title: 'API Error',
+                text: 'opentdb API is not working now!, Game will be continue with static questions.',
+                icon: 'warning',
               }).then((result) => {
-                  if(result.value){
-                    this.props.history.push("/");
-                  }
-              })
+                this.setState({questions: questionsJson.questions, loaded: true});
+                this.headerComponent.current.startCountdown();
+                sessionStorage.setItem("quizDifficulty", null);
+            })
           }
         );
     }
@@ -51,6 +53,7 @@ class GameScreenContainer extends React.Component {
     // update score respect to time, and check answer is true
     clickedAnswer(result) {
         if(result == "correct") {
+            sessionStorage.setItem("userScore", this.state.score + (10 * this.headerComponent.current.state.remainingTime));
             this.setState({score: this.state.score + (10 * this.headerComponent.current.state.remainingTime), remainingTime: 15, isCorrect: true, showQuestion: false});
             this.headerComponent.current.resetCountdown();
             this.headerComponent.current.stopCountdown();
